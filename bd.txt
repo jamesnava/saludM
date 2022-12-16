@@ -1,0 +1,86 @@
+/* CREANDO TABLE DIAGNOSTICO*/
+CREATE TABLE DX(
+idDX INT IDENTITY(1,1),
+codi_DX VARCHAR(15),
+nombreDX VARCHAR(100),
+PRIMARY KEY (idDX)
+)
+
+/* CREANDO TABLE PAQUETE*/
+CREATE TABLE PAQUETE(
+codPaquete VARCHAR(10),
+nombrePaquete VARCHAR(50),
+descripcionPaquete VARCHAR(100),
+PRIMARY KEY (codPaquete)
+)
+
+
+/* CREANDO TABLE PAQUETE DETALLE*/
+CREATE TABLE DETA_PAQUETE(
+idDETA_PAQUETE INT IDENTITY(1,1),
+codPaquete VARCHAR(10),
+idDX INT,
+PRIMARY KEY (idDETA_PAQUETE),
+FOREIGN KEY (codPaquete) REFERENCES PAQUETE (codPaquete),
+FOREIGN KEY (idDX) REFERENCES DX(idDX)
+)
+/* CREANDO TABLE PROGRAMAS*/
+
+CREATE TABLE PROGRAMA(
+idPrograma INT IDENTITY(1,1),
+codPaquete VARCHAR(10),
+nombrePaquete VARCHAR(100),
+nroIntervencioN INT,
+PRIMARY KEY(idPrograma),
+FOREIGN KEY (codPaquete) REFERENCES PAQUETE(codPaquete)
+)
+
+/* USUARIO*/
+
+CREATE TABLE USUARIO(
+dniUsuario VARCHAR(8),
+nombreUsuario VARCHAR(50),
+apellidoPUsuario VARCHAR(50),
+apellidoMUsuario VARCHAR(50),
+usuario VARCHAR(20),
+pass VARCHAR(200),
+estado VARCHAR(10),
+PRIMARY KEY (dniUsuario))
+
+/*crear Atencion*/
+
+CREATE TABLE ATENCION(
+idAtencion INT IDENTITY(1,1),
+idPrograma INT,
+dni VARCHAR(11),
+nombre VARCHAR(50),
+apellidoP VARCHAR(50),
+apellidoM VARCHAR(50),
+edad INT,
+direccion VARCHAR(50),
+celular VARCHAR(11),
+dniUsuario VARCHAR(8),
+Fecha_Crea DATETIME,
+estado VARCHAR(10)
+PRIMARY KEY(idAtencion),
+FOREIGN KEY(idPrograma) REFERENCES PROGRAMA(idPrograma),
+FOREIGN KEY(dniUsuario) REFERENCES USUARIO(dniUsuario)
+)
+
+/*crear detalle atencion*/
+
+CREATE TABLE DETA_ATENCION(
+idDETAATENCION INT IDENTITY(1,1),
+idAtencion INT,
+Programa INT,
+Paquete VARCHAR(10),
+progFecha DATETIME,
+fechaAtencion DATETIME,
+diagnostico VARCHAR(10),
+nroConsulta INT,
+interconsulta VARCHAR(50),
+estado VARCHAR(11),
+usuarioA VARCHAR(8),
+PRIMARY KEY(idDETAATENCION),
+FOREIGN KEY(idAtencion) REFERENCES ATENCION(idAtencion)
+)
