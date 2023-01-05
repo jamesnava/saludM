@@ -80,10 +80,10 @@ class Ventana_Principal(object):
 		self.Frame_PackLeft=Frame(self.Frame_PackGeneral,highlightbackground="blue", highlightthickness=1,width=int(self.width*0.19),height=self.height)
 		self.Frame_PackLeft.grid_propagate(False)
 		self.Frame_PackLeft.place(x=0,y=0)
-		self.Paquetes()
+		
 
 		etiqueta_paquetes=Label(self.Frame_PackLeft,text='Paquetes Disponibles',bg='gray',fg='white',width=int(self.width*0.019),font=letra)
-		etiqueta_paquetes.grid(row=0,column=0)
+		etiqueta_paquetes.grid(row=0,column=0,columnspan=3)
 
 		self.Frame_PackRight=Frame(self.Frame_PackGeneral,bg='white',width=int(self.width*0.79),height=self.height)
 		self.Frame_PackRight.place(x=int(self.width*0.2),y=0)
@@ -99,6 +99,8 @@ class Ventana_Principal(object):
 
 		etiqueta_paquetes=Label(self.Frame_PackDeta,text='Detalle de los paquetes',font=letra,bg='gray',fg='white',width=int(self.width*0.08),anchor='center')
 		etiqueta_paquetes.place(x=0,y=0)
+		self.Paquetes()
+
 	def Frame_NewAtencion(self):
 		letra=('Helvetica',12,'bold')
 		self.Frame_AtencionNew=Frame(self.Frame_Principal,width=self.width,height=self.height)
@@ -135,13 +137,13 @@ class Ventana_Principal(object):
 		self.Frame_ProgramasDeta.place(x=0,y=int(self.height*0.51))
 
 		etiqueta_paquetes=Label(self.Frame_ProgramasDeta,text='Detalle del Programa',font=letra,bg='#1F0C3E',fg='white',width=int(self.width*0.08),anchor='center')
-		etiqueta_paquetes.place(x=0,y=0)
-		
+		etiqueta_paquetes.place(x=0,y=0)		
 
 
 	def Frame_NewPaquete(self):		
 		obj_framePaquete=Frame_Paquete.Paquetes()
 		obj_framePaquete.NuevoPaquete(self.Frame_PackNew)
+
 	def Frame_DetaPaquete(self):
 		obj_framePaquete=Frame_Paquete.Paquetes()
 		obj_framePaquete.DetallePaquete(self.Frame_PackDeta)
@@ -163,20 +165,14 @@ class Ventana_Principal(object):
 			messagebox.showinfo('Alerta',f'Error {e}')
 	def calendar_event(self,event):		
 		self.llenar_Menu()
-	def Paquetes(self):
 
-		try:
-			Nro_Cupo=0
-			for i in range(4):			
-				globals()['self.cupo%s'%Nro_Cupo]=Label(self.Frame_PackLeft,text=f"PAQUETE NUMERO: {Nro_Cupo}",width=40,bg='green',fg='white',borderwidth=2)
-				globals()['self.cupo%s'%Nro_Cupo].bind('<Button-3>',self.evento_clickRight)
-				globals()['self.cupo%s'%Nro_Cupo].grid(row=i+1,column=0,ipady=20,padx=7,pady=5)							
-				Nro_Cupo+=1			
-		except Exception as e:
-			print(e)
+	def Paquetes(self):
+		self.MenuProgramas=Listbox(self.Frame_PackLeft,width=int(self.width*0.030))
+		self.MenuProgramas.grid(row=1,column=0,columnspan=3,rowspan=20)
+		
 		btn=ttk.Button(self.Frame_PackLeft,text='Boton')
 		btn['command']=self.Frame_DetaPaquete
-		btn.grid(row=5,column=0)	
+		btn.grid(row=21,column=0)	
 
 	
 	

@@ -84,3 +84,9 @@ usuarioA VARCHAR(8),
 PRIMARY KEY(idDETAATENCION),
 FOREIGN KEY(idAtencion) REFERENCES ATENCION(idAtencion)
 )
+
+###################################ALTER TABLE#$#################################
+ALTER TABLE DX ALTER COLUMN nombreDX VARCHAR(300)
+
+___________________________________________________________________________________
+ALTER TABLE PAQUETE ADD COLUMN estado VARCHAR(15)

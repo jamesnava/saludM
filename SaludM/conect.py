@@ -23,10 +23,10 @@ class Conexion_Galen(object):
 	def close_conection(self):
 		self.conn.close()
 
-class Conexion_Triaje(object):
+class Conexion_Programas(object):
 	def __init__(self):
 		self.configuracion=configparser.ConfigParser()
-		self.configuracion.read('config_Triaje.ini')
+		self.configuracion.read('config_Programa.ini')
 	def ejecutar_conn(self):
 		servidor=self.configuracion['DEFAULT']['SERVER']
 		bd=self.configuracion['DEFAULT']['DATABASE']
@@ -39,7 +39,7 @@ class Conexion_Triaje(object):
 			self.puntero=self.conn.cursor()
 			return self.puntero
 		except Exception as e:
-			messagebox.showinfo('Notificación','No pudo conectarse al servidor SISGALENPLUS')		
+			messagebox.showinfo('Notificación','No pudo conectarse al servidor PROGRAMAS')		
 		
 	def close_conection(self):
 		self.conn.close()
